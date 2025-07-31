@@ -11,26 +11,22 @@
       font-family: 'Arial Black', Gadget, Oswald;
       text-align: center;
       padding-top: 100px;
-      perspective: 800px; /* giver dybde til 3D-effekten */
+      perspective: 1000px; /* giver 3D-effekt */
     }
 
     .rotating-text {
       display: inline-block;
-      font-size: 64px;
+      font-size: 120px;
       font-weight: bold;
-      color: #00ffff;
-      animation: spinY 3s linear infinite;
+      color: #6B7D62;
+      animation: spinY 4s linear infinite;
       transform-style: preserve-3d;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
     }
 
     @keyframes spinY {
-      0%   { transform: rotateX(0deg); }
-      100% { transform: rotateX(360deg); }
-    }
-
-    /* Gør det ekstra retro med en glød-effekt */
-    .rotating-text {
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+      0%   { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
     }
   </style>
 </head>
