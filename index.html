@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTHSTAR</title>
 
+  <!-- Pixel font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
@@ -31,17 +32,9 @@
         -1px 0 #0ff,
         0 1px #0ff,
         0 -1px #0ff;
-      max-width: 300px;
     }
 
-    .rotating-text img {
-      width: 150px;
-      display: block;
-      margin: 0 auto 20px;
-      user-select: none;
-      pointer-events: none;
-    }
-
+    /* Glitch layers */
     .rotating-text::before,
     .rotating-text::after {
       content: attr(data-text);
@@ -125,7 +118,6 @@
 <body>
   <div class="rotating-text" data-text="NORTHSTAR
 LOADING">
-    <img src="dit-logo.png" alt="Northstar Logo" />
     NORTHSTAR<br>LOADING
   </div>
 </body>
