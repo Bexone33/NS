@@ -8,27 +8,34 @@
     body {
       background-color: black;
       color: white;
-      font-family: sans-serif;
+      font-family: 'Arial Black', Gadget, Oswald;
       text-align: center;
       padding-top: 100px;
+      perspective: 800px; /* giver dybde til 3D-effekten */
     }
 
     .rotating-text {
-      font-size: 48px;
+      display: inline-block;
+      font-size: 64px;
       font-weight: bold;
       color: #00ffff;
-      animation: spin 5s linear infinite;
-      display: inline-block;
+      animation: spinY 3s linear infinite;
+      transform-style: preserve-3d;
     }
 
-    @keyframes spin {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes spinY {
+      0%   { transform: rotateX(0deg); }
+      100% { transform: rotateX(360deg); }
+    }
+
+    /* Gør det ekstra retro med en glød-effekt */
+    .rotating-text {
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
     }
   </style>
 </head>
 <body>
   <div class="rotating-text">NORTHSTAR</div>
-  <p>NORTHSTAR LOADING</p>
+  <p style="color:#888; margin-top:40px;"></p>
 </body>
 </html>
