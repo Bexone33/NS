@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTHSTAR</title>
+
+  <!-- Import pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
   <style>
     body {
       background-color: black;
-      color: white;
-      font-family: 'Arial Black', Gadget, Oswald;
+      color: #0ff;
+      font-family: 'Press Start 2P', cursive;
       text-align: center;
       padding-top: 100px;
-      perspective: 1000px; /* giver 3D-effekt */
+      perspective: 1000px;
     }
 
     .rotating-text {
       display: inline-block;
-      font-size: 120px;
-      font-weight: bold;
-      color: #589a9a;
-      animation: spinY 6s linear infinite;
+      font-size: 40px;
+      font-weight: normal;
+      animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
       transform-style: preserve-3d;
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+      /* lidt skarpere pixeleret look */
+      text-shadow:
+        1px 0 #0ff,
+        -1px 0 #0ff,
+        0 1px #0ff,
+        0 -1px #0ff;
+      line-height: 1.2;
     }
 
     @keyframes spinY {
       0%   { transform: rotateY(0deg); }
       100% { transform: rotateY(360deg); }
     }
+
+    /* Simple flicker animation */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; filter: none; }
+      50% { opacity: 0.7; filter: brightness(1.2); }
+    }
   </style>
 </head>
 <body>
-  <div class="rotating-text">NORTHSTAR</div>
-<div class="rotating-text">
+  <div class="rotating-text">
     NORTHSTAR<br>LOADING
   </div>
 </body>
