@@ -15,43 +15,35 @@
       text-align: center;
       padding-top: 100px;
       perspective: 1000px;
-      margin: 0;
     }
 
     .rotating-text {
       display: inline-block;
-      white-space: pre-line; /* gør linjeskift muligt */
-      color: #0ff;
+      font-size: 40px;
+      font-weight: normal;
+      animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
+      transform-style: preserve-3d;
       position: relative;
       line-height: 1.2;
-      font-size: 40px;
+      color: #0ff;
       text-shadow:
         1px 0 #0ff,
         -1px 0 #0ff,
         0 1px #0ff,
         0 -1px #0ff;
+      max-width: 300px;
     }
 
     .rotating-text img {
       width: 150px;
       display: block;
       margin: 0 auto 20px;
-      pointer-events: none;
       user-select: none;
-      animation: spinY 6s linear infinite;
-      transform-style: preserve-3d;
+      pointer-events: none;
     }
 
-    .rotating-text span {
-      display: inline-block;
-      animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
-      transform-style: preserve-3d;
-      position: relative;
-    }
-
-    /* Glitch-effekt via pseudo-elementer på teksten */
-    .rotating-text span::before,
-    .rotating-text span::after {
+    .rotating-text::before,
+    .rotating-text::after {
       content: attr(data-text);
       position: absolute;
       left: 0;
@@ -59,22 +51,18 @@
       width: 100%;
       overflow: hidden;
       clip: rect(0, 900px, 0, 0);
-      color: #0ff;
-      text-shadow:
-        1px 0 red,
-        -1px 0 red;
-      animation: glitchTop 2s infinite linear alternate-reverse;
-      z-index: -1;
     }
 
-    .rotating-text span::after {
-      left: 0;
-      text-shadow:
-        1px 0 blue,
-        -1px 0 blue;
+    .rotating-text::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+
+    .rotating-text::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
       animation: glitchBottom 2s infinite linear alternate-reverse;
-      clip: rect(0, 900px, 0, 0);
-      z-index: -1;
     }
 
     @keyframes spinY {
@@ -137,9 +125,8 @@
 <body>
   <div class="rotating-text" data-text="NORTHSTAR
 LOADING">
-    <img src="logo-4-transparent.png" alt="Northstar Logo" />
-    <span data-text="NORTHSTAR
-LOADING">NORTHSTAR<br>LOADING</span>
+    <img src="dit-logo.png" alt="Northstar Logo" />
+    NORTHSTAR<br>LOADING
   </div>
 </body>
 </html>
