@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTHSTAR</title>
 
-  <!-- Pixel font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
@@ -16,17 +15,16 @@
       text-align: center;
       padding-top: 100px;
       perspective: 1000px;
+      margin: 0;
     }
 
     .rotating-text {
       display: inline-block;
-      font-size: 92px;
-      font-weight: normal;
-      animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
-      transform-style: preserve-3d;
+      white-space: pre-line; /* gør linjeskift muligt */
+      color: #0ff;
       position: relative;
       line-height: 1.2;
-      color: #0ff;
+      font-size: 40px;
       text-shadow:
         1px 0 #0ff,
         -1px 0 #0ff,
@@ -34,9 +32,26 @@
         0 -1px #0ff;
     }
 
-    /* Glitch layers */
-    .rotating-text::before,
-    .rotating-text::after {
+    .rotating-text img {
+      width: 150px;
+      display: block;
+      margin: 0 auto 20px;
+      pointer-events: none;
+      user-select: none;
+      animation: spinY 6s linear infinite;
+      transform-style: preserve-3d;
+    }
+
+    .rotating-text span {
+      display: inline-block;
+      animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    /* Glitch-effekt via pseudo-elementer på teksten */
+    .rotating-text span::before,
+    .rotating-text span::after {
       content: attr(data-text);
       position: absolute;
       left: 0;
@@ -44,18 +59,22 @@
       width: 100%;
       overflow: hidden;
       clip: rect(0, 900px, 0, 0);
-    }
-
-    .rotating-text::before {
-      left: 2px;
-      text-shadow: -2px 0 red;
+      color: #0ff;
+      text-shadow:
+        1px 0 red,
+        -1px 0 red;
       animation: glitchTop 2s infinite linear alternate-reverse;
+      z-index: -1;
     }
 
-    .rotating-text::after {
-      left: -2px;
-      text-shadow: -2px 0 blue;
+    .rotating-text span::after {
+      left: 0;
+      text-shadow:
+        1px 0 blue,
+        -1px 0 blue;
       animation: glitchBottom 2s infinite linear alternate-reverse;
+      clip: rect(0, 900px, 0, 0);
+      z-index: -1;
     }
 
     @keyframes spinY {
@@ -118,9 +137,9 @@
 <body>
   <div class="rotating-text" data-text="NORTHSTAR
 LOADING">
-  NORTHSTAR<br>LOADING  
-<img src="logo-4-transparent.png" alt="Northstar Logo" style="width:150px; display:block; margin: 0 auto 20px;" />
-
-</div>
+    <img src="logo-4-transparent.png" alt="Northstar Logo" />
+    <span data-text="NORTHSTAR
+LOADING">NORTHSTAR<br>LOADING</span>
+  </div>
 </body>
 </html>
