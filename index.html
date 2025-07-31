@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTHSTAR</title>
 
-  <!-- Import pixel font -->
+  <!-- Pixel font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
@@ -20,17 +20,42 @@
 
     .rotating-text {
       display: inline-block;
-      font-size: 40px;
+      font-size: 92px;
       font-weight: normal;
       animation: spinY 6s linear infinite, flicker 1.5s infinite alternate;
       transform-style: preserve-3d;
-      /* lidt skarpere pixeleret look */
+      position: relative;
+      line-height: 1.2;
+      color: #0ff;
       text-shadow:
         1px 0 #0ff,
         -1px 0 #0ff,
         0 1px #0ff,
         0 -1px #0ff;
-      line-height: 1.2;
+    }
+
+    /* Glitch layers */
+    .rotating-text::before,
+    .rotating-text::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .rotating-text::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+
+    .rotating-text::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      animation: glitchBottom 2s infinite linear alternate-reverse;
     }
 
     @keyframes spinY {
@@ -38,15 +63,61 @@
       100% { transform: rotateY(360deg); }
     }
 
-    /* Simple flicker animation */
     @keyframes flicker {
       0%, 100% { opacity: 1; filter: none; }
       50% { opacity: 0.7; filter: brightness(1.2); }
     }
+
+    @keyframes glitchTop {
+      0% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: translate(0);
+      }
+      10% {
+        clip: rect(0, 9999px, 10px, 0);
+        transform: translate(-2px, -2px);
+      }
+      20% {
+        clip: rect(0, 9999px, 5px, 0);
+        transform: translate(2px, 2px);
+      }
+      30% {
+        clip: rect(0, 9999px, 10px, 0);
+        transform: translate(-2px, 0);
+      }
+      40%, 100% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: translate(0);
+      }
+    }
+
+    @keyframes glitchBottom {
+      0% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: translate(0);
+      }
+      10% {
+        clip: rect(5px, 9999px, 15px, 0);
+        transform: translate(2px, 2px);
+      }
+      20% {
+        clip: rect(10px, 9999px, 20px, 0);
+        transform: translate(-2px, -2px);
+      }
+      30% {
+        clip: rect(5px, 9999px, 15px, 0);
+        transform: translate(2px, 0);
+      }
+      40%, 100% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: translate(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="rotating-text">
+  <div class="rotating-text" data-text="NORTHSTAR
+LOADING">
     NORTHSTAR<br>LOADING
   </div>
 </body>
